@@ -5,8 +5,8 @@ stages:
   - deploy
 
 variables:
-  $IMAGE_NAME: "djg"
-  $IMAGE_TAG: "0.01"
+  $IMAGE_NAME: djg
+  $IMAGE_TAG: 0.01
 
 testcode:
   stage: test
