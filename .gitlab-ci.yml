@@ -28,7 +28,7 @@ build:
     - ls -al build/ 
   artifacts:
     paths:
-      - build/image.tar
+      - 01_IntroductionToDevOps/build/
 test:
   stage: test
   script:
