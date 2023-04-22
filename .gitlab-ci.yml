@@ -18,6 +18,7 @@ testcode:
 build:
   stage: build
   script:
+    - ls -al
     - docker build -t $IMAGE_NAME:$IMAGE_TAG .
     - mkdir -p build
     - docker save $IMAGE_NAME:$IMAGE_TAG -o build/image.tar
