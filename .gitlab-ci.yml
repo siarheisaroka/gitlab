@@ -25,6 +25,7 @@ build:
     - mkdir -p build
     - ls -al
     - docker save $IMAGE_NAME:$IMAGE_TAG -o build/image.tar
+    - ls -al build/ 
   artifacts:
     paths:
       - build/
