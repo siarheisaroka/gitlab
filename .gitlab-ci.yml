@@ -38,6 +38,7 @@ test:
       - curl http://127.0.0.1:8000
   after_script:
     - echo "Execute this command after the `script` section completes."
+    - cd 01_IntroductionToDevOps
     - ls -al
     - docker-compose down
 
