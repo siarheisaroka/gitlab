@@ -23,6 +23,7 @@ build:
     - cd 01_IntroductionToDevOps
     - docker build -t $IMAGE_NAME:$IMAGE_TAG .
     - mkdir -p build
+    - ls -al
     - docker save $IMAGE_NAME:$IMAGE_TAG -o build/image.tar
   artifacts:
     paths:
