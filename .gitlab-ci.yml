@@ -34,6 +34,7 @@ test:
   stage: test
   script:
       - cd 01_IntroductionToDevOps
+      - docker container prune -f
       - docker-compose up -d 
 
 save:
