@@ -9,12 +9,11 @@ variables:
   IMAGE_TAG: "0.01"
 
 testcode:
-  stage: test
+  stage: testcode
   script:
     - cd 01_IntroductionToDevOps
-    - apt-get update && apt-get install -y python3-pip
-    - pip3 install flake8
-    - /home/gitlab-runner/.local/lib/python3.9/site-packages/flake8 --exclude=.venv --ignore=E501 .
+    - PATH=/home/gitlab-runner/.local/bin:$PATH
+    - flake8 --exclude=.venv --ignore=E501 .
 
 build:
   stage: build
@@ -28,9 +27,6 @@ build:
   artifacts:
     paths:
       - build/
-    
-
-
 test:
   stage: test
   script:
