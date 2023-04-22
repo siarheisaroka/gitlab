@@ -39,7 +39,7 @@ test:
       - docker-compose up -d
       - sleep 10
       - ss -ntpl
-      - curl http://127.0.0.1:8000
+      - ./test_app.sh
   after_script:
     - echo "Execute this command after the `script` section completes."
     - cd 01_IntroductionToDevOps
