@@ -1,0 +1,40 @@
+stages:
+  - testcode
+  - build
+  - test
+  - deploy
+
+variables:
+  $IMAGE_NAME: "djg"
+  $IMAGE_TAG: "0.01"
+
+testcode:
+  stage: test
+  script:
+    - apt-get update && apt-get install -y python3-pip
+    - pip3 install flake8
+    - flake8 --exclude=.venv --ignore=E501 .
+
+build:
+  stage: build
+  script:
+    - docker build -t $IMAGE_NAME:$IMAGE_TAG .
+    - mkdir -p build
+    - docker save $IMAGE_NAME:$IMAGE_TAG -o build/image.tar
+  artifacts:
+    paths:
+      - build/
+    
+
+
+test:
+  stage: test
+  script:
+      - docker-compose up -d 
+
+save:
+  stage: delpoy
+  script:
+    - docker tag djg:0.01 myregistry/myapp:latest
+
+
