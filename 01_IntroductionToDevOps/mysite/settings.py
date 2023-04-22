@@ -25,7 +25,7 @@ SECRET_KEY = 'n069kq!wejc&v9mv8v9!bruaxqop$zyov&k#8q)m+s+u#jnh)e'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [ '*', '.pythonanywhere.com', '.herokuapp.com']
+ALLOWED_HOSTS = ['*', '.pythonanywhere.com', '.herokuapp.com']
 
 
 # Application definition
@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-	'NAME': 'lab_db',
+        'NAME': 'lab_db',
         'USER': 'labapp',
         'PASSWORD': '123',
         'HOST': 'postgre',
