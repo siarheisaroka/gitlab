@@ -33,6 +33,7 @@ build:
 test:
   stage: test
   script:
+      - cd 01_IntroductionToDevOps
       - docker-compose up -d 
 
 save:
