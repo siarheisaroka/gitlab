@@ -37,7 +37,8 @@ test:
       - cd 01_IntroductionToDevOps
       - docker system prune -f
       - docker-compose up -d
-      - curl localhost:8000
+      - ss -ntpl
+      - curl http://localhost:8000
       - docker-compose down
 
 save:
