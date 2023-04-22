@@ -28,7 +28,7 @@ build:
     - ls -al build/ 
   artifacts:
     paths:
-      - build/
+      - build/image.tar
 test:
   stage: test
   script:
