@@ -35,11 +35,16 @@ test:
       - docker-compose up -d
       - ss -ntpl
       - curl http://127.0.0.1:8000
-      - docker-compose down
+  after_script:
+    - echo "Execute this command after the `script` section completes."
+    - docker-compose down
+
+      
 
 save:
   stage: deploy
   script:
     - docker tag djg:0.01 myregistry/myapp:latest
+
 
 
