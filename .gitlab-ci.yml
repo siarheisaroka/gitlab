@@ -19,6 +19,7 @@ testcode:
 build:
   stage: build
   script:
+    - docker system prune -f
     - ls -al
     - cd 01_IntroductionToDevOps
     - docker build -t $IMAGE_NAME:$IMAGE_TAG .
@@ -34,8 +35,10 @@ test:
   stage: test
   script:
       - cd 01_IntroductionToDevOps
-      - docker container prune -f
-      - docker-compose up -d 
+      - docker system prune -f
+      - docker-compose up -d
+      - curl localhost:8000
+      - docker-compose down
 
 save:
   stage: deploy
