@@ -33,6 +33,7 @@ test:
       - cd 01_IntroductionToDevOps
       - docker system prune -f
       - docker-compose up -d
+      - sleep 10
       - ss -ntpl
       - curl http://127.0.0.1:8000
   after_script:
