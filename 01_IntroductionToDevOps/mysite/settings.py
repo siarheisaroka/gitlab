@@ -80,7 +80,7 @@ DATABASES = {
 	'NAME': 'lab_db',
         'USER': 'labapp',
         'PASSWORD': '123',
-        'HOST': 'localhost',
+        'HOST': 'postgre',
         'PORT': '5432'
     }
 }

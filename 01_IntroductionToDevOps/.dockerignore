@@ -6,3 +6,7 @@ db.sqlite3
 
 # Editor files
 .vscode/
+*.sql
+*.md
+LIC*
+
