@@ -33,7 +33,7 @@ test:
       - docker-compose up -d 
 
 save:
-  stage: delpoy
+  stage: deploy
   script:
     - docker tag djg:0.01 myregistry/myapp:latest
 
