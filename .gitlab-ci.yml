@@ -24,7 +24,7 @@ build:
     - docker build -t $IMAGE_NAME:$IMAGE_TAG .
     - mkdir -p build
     - ls -al
-    - docker save $IMAGE_NAME:$IMAGE_TAG -o build/image.tar
+    - docker save $IMAGE_NAME:$IMAGE_TAG -o build/$IMAGE_NAME.tar.gz
     - ls -al build/
     - echo "registry name is $CI_REGISTRY_IMAGE" 
   artifacts:
