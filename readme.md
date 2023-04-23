@@ -15,3 +15,4 @@ Here's what I did to fix it:
     9. Connected the runner to GitLab.
     10. Fixed Python files for linter requirements.
     11. Wrote a CI pipeline to lint, build, test, and save the APP.
+    12. Wrote a shell script to test the artifact.
