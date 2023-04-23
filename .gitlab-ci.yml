@@ -46,12 +46,15 @@ test:
     - ls -al
     - docker-compose down
 
-      
-
 save:
   stage: push
   script:
-    - docker tag djg:0.01 myregistry/myapp:latest
+    - cd 01_IntroductionToDevOps
+    - docker load -i build/$IMAGE_NAME.tar.gz
+    - docker tag $IMAGE_NAME:$IMAGE_TAG $DOCKER_USER_NAME/$IMAGE_NAME:$IMAGE_TAG
+    - docker login -u $DOCKER_USER_NAME -p $BUILD_TOKEN
+    - docker push $DOCKER_USER_NAME/$IMAGE_NAME:$IMAGE_TAG
+  
 
 
 
