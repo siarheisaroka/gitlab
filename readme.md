@@ -1,6 +1,6 @@
 # Django girls APP
 
-What I have is a partially working Django APP.
+I have is a partially working Django APP.
 
 Here's what I did to fix it:
 
