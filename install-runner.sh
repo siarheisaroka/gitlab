@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -ex
+set -x
 
 check_service_status() {
     local service_name="$1"
@@ -18,17 +18,17 @@ check_service_status() {
     return $exit_code
 }
 
-check_config() {
-
-    if test -f /etc/gitlab-runner/config.toml; then
-        echo "Config File exists"
-    else
-        install_runner
+check_runner() {
+    if which gitlab-runner ; then
+    sudo gitlab-runner unregister --all-runners
+    sudo -u gitlab-runner gitlab-runner unregister --all-runners
     fi
+    install_runner
 
 }
 
 install_runner() {
+    
     # Download the binary for your system
     sudo curl -L --output /usr/local/bin/gitlab-runner https://gitlab-runner-downloads.s3.amazonaws.com/latest/binaries/gitlab-runner-linux-amd64
 
@@ -89,4 +89,4 @@ install_runner() {
     sudo systemctl enable gitlab-runner
 }
 
-check_config
+check_runner
