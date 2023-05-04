@@ -19,18 +19,26 @@ check_service_status() {
 }
 
 check_runner() {
-    if which gitlab-runner ; then
-    sudo gitlab-runner unregister --all-runners
-    sudo -u gitlab-runner gitlab-runner unregister --all-runners
+    if which gitlab-runner; then
+        sudo gitlab-runner unregister --all-runners
+        sudo -u gitlab-runner gitlab-runner unregister --all-runners
+    fi
+    if [ -f /etc/gitlab-runner/config.toml ]; then
+        sudo rm -f /etc/gitlab-runner/config.toml
+        sudo rm -f /home/gitlab-runner/.gitlab-runner/config.toml
     fi
     install_runner
 
 }
 
 install_runner() {
-    
+
     # Download the binary for your system
-    sudo curl -L --output /usr/local/bin/gitlab-runner https://gitlab-runner-downloads.s3.amazonaws.com/latest/binaries/gitlab-runner-linux-amd64
+    if [ ! -e "/usr/local/bin/gitlab-runner" ]; then
+        echo "Downloading runner"
+        sudo curl -L --output /usr/local/bin/gitlab-runner https://gitlab-runner-downloads.s3.amazonaws.com/latest/binaries/gitlab-runner-linux-amd64
+        # command to run if file does not exist
+    fi
 
     # Give it permission to execute
     sudo chmod +x /usr/local/bin/gitlab-runner
