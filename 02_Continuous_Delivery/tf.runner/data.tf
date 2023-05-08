@@ -8,10 +8,10 @@
 # #   }
 # # }
 
-# data "google_service_account" "sa04-tf" {
-#   account_id = "sa04-tf@saroka-gc-bootcamp.iam.gserviceaccount.com"
-#   project    = var.project
-# }
+data "google_service_account" "def-sa" {
+  account_id = "583016262112-compute@developer.gserviceaccount.com"
+  project    = var.project
+}
 
 # data "google_compute_network" "tf_vpc" {
 #   name    = "${var.studentname}-${var.studentsurname}-01-vpc"

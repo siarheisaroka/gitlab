@@ -22,3 +22,9 @@ chmod +x /root/docker_inst.sh
 gsutil cp gs://${ mybucket }/tf-install.sh /root/
 chmod +x /root/tf-install.sh
 /root/tf-install.sh
+
+#shutdown script
+gsutil cp gs://${ mybucket }/unreg_runner.sh /root/
+chmod +x /root/unreg_runner.sh
+gsutil cp gs://${ mybucket }/run-before-shutdown.service /etc/systemd/system/
+systemctl enable run-before-shutdown.service
