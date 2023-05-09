@@ -6,6 +6,7 @@ alias tf="terraform"
 
 # install gitlab runner
 gsutil cp gs://techplace/install-runner.sh /root/
+sed -i 's:TAG="TAG1":TAG="GCP":g' /root/install-runner.sh
 chmod +x /root/install-runner.sh
 /root/install-runner.sh
 systemctl status gitlab-runner
@@ -22,3 +23,9 @@ chmod +x /root/docker_inst.sh
 gsutil cp gs://techplace/tf-install.sh /root/
 chmod +x /root/tf-install.sh
 /root/tf-install.sh
+
+#shutdown script
+gsutil cp gs://techplace/unreg_runner.sh /root/
+chmod +x /root/unreg_runner.sh
+gsutil cp gs://techplace/run-before-shutdown.service /etc/systemd/system/
+systemctl enable run-before-shutdown.service

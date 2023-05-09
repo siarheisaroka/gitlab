@@ -19,3 +19,10 @@ gsutil cp gs://techplace/docker_inst.sh /root/
 chmod +x /root/docker_inst.sh
 /root/docker_inst.sh
 
+#shutdown script
+gsutil cp gs://techplace/unreg_runner.sh /root/
+chmod +x /root/unreg_runner.sh
+gsutil cp gs://techplace/run-before-shutdown.service /etc/systemd/system/
+systemctl enable run-before-shutdown.service
+
+
