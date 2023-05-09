@@ -11,8 +11,8 @@ chmod +x /root/install-runner.sh
 /root/install-runner.sh
 systemctl status gitlab-runner
 
-# install git
-sudo apt update && sudo apt install git -y
+# install git & pip
+sudo apt update && sudo apt install git pip -y
 
 # install docker
 gsutil cp gs://${ mybucket }/docker_inst.sh /root/

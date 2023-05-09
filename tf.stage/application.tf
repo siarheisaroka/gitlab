@@ -13,7 +13,7 @@ resource "google_compute_instance_template" "stage" {
   description = "This template is used to create gitlab runner server instances."
 
   machine_type = "e2-medium"
-  tags         = ["stage-runner"]
+  tags         = ["stage-runner", "http-server", "https-server"]
   project      = var.project
 
   labels = {
@@ -60,19 +60,19 @@ resource "google_compute_instance_template" "stage" {
 #   name    = "static-ip"
 # }
 
-# # health check
-# resource "google_compute_health_check" "ssh" {
-#   project             = var.project
-#   name                = "autohealing-ssh-check"
-#   check_interval_sec  = 5
-#   timeout_sec         = 5
-#   healthy_threshold   = 2
-#   unhealthy_threshold = 10 # 50 seconds
+# health check
+resource "google_compute_health_check" "ssh" {
+  project             = var.project
+  name                = "autohealing-ssh-check-stage"
+  check_interval_sec  = 5
+  timeout_sec         = 5
+  healthy_threshold   = 2
+  unhealthy_threshold = 10 # 50 seconds
 
-#   tcp_health_check {
-#     port = "22"
-#   }
-# }
+  tcp_health_check {
+    port = "22"
+  }
+}
 
 resource "google_compute_region_instance_group_manager" "stage02" {
   project            = var.project
@@ -97,7 +97,7 @@ resource "google_compute_region_instance_group_manager" "stage02" {
   }
 
   auto_healing_policies {
-    health_check      = data.google_compute_health_check.ssh.id
+    health_check      = google_compute_health_check.ssh.self_link
     initial_delay_sec = 300
   }
   update_policy {
