@@ -13,6 +13,7 @@ testcode:
   tags:
     - GCP
   script:
+    - pip install flake8
     - cd 01_IntroductionToDevOps
     - PATH=/home/gitlab-runner/.local/bin:$PATH
     - flake8 --exclude=.venv --ignore=E501 .
