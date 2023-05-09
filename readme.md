@@ -1,18 +1,34 @@
-# Django girls APP
+# Skillbox tasks
 
-I have is a partially working Django APP.
+**Task 1 - branch task01**
+**Task 2 - branch task02**
 
-Here's what I did to fix it:
-
-    1. Added DB connection settings to the APP.
-    2. Added DB dependency modules to requirements.txt.
-    3. Wrote a DB SQL init script.
-    4. Wrote a start script for the APP.
-    5. Wrote a script to create an admin user for the APP.
-    6. Created a Dockerfile for the APP.
-    7. Created a docker-compose file to start the DB and the APP.
-    8. Spun up a GitLab runner on GCP and set it up as a shell executor.
-    9. Connected the runner to GitLab.
-    10. Fixed Python files for linter requirements.
-    11. Wrote a CI pipeline to lint, build, test, and save the APP.
-    12. Wrote a shell script to test the artifact.
+Directory stucture:
+```
+├── docker_inst.sh - docker install script example for runner
+├── install-runner.sh gitlab runner install script example 
+├── readme.md- current file
+├── run-before-shutdown.service - unregister runner service example
+├── unreg_runner.sh - unregister runner script example
+├── tf-install.sh - terraform install script example
+├── start.sh - startup script example for runners
+├── tf.runner
+│   ├── application.tf      - statefull MiG for runner
+│   ├── data.tf             - external datasource
+│   ├── locals.tf           - locals
+│   ├── root.tf             - provider settings
+│   ├── start.sh            - startup shell script
+│   ├── start.tpl           - startup shell script template
+│   ├── terraform.tfvars    - variables values
+│   └── vars.tf             - variables 
+├── tf.stage
+│   ├── application.tf      - statefull MiG for stage app server
+│   ├── data.tf             - external datasource
+│   ├── locals.tf           - locals
+│   ├── outputs.tf          - outputs
+│   ├── root.tf             - provider settings
+│   ├── start.sh            - startup shell script
+│   ├── start.tpl           - startup shell script template
+│   ├── terraform.tfvars    - variables values
+│   └── vars.tf             - variables
+```
