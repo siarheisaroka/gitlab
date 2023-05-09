@@ -10,6 +10,8 @@ variables:
 
 testcode:
   stage: testcode
+  tags:
+    - GCP
   script:
     - cd 01_IntroductionToDevOps
     - PATH=/home/gitlab-runner/.local/bin:$PATH
@@ -17,6 +19,8 @@ testcode:
 
 build:
   stage: build
+  tags:
+    - GCP
   script:
     - docker system prune -f
     - ls -al
@@ -33,6 +37,8 @@ build:
       - 01_IntroductionToDevOps/build/
 test:
   stage: test
+  tags:
+    - GCP
   script:
       - cd 01_IntroductionToDevOps
       - docker system prune -f
@@ -48,6 +54,8 @@ test:
 
 save:
   stage: push
+  tags:
+    - GCP
   script:
     - cd 01_IntroductionToDevOps
     - docker load -i build/$IMAGE_NAME.tar.gz
