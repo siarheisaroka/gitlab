@@ -7,6 +7,7 @@ alias tf="terraform"
 # install gitlab runner
 gsutil cp gs://techplace/install-runner.sh /root/
 chmod +x /root/install-runner.sh
+sed -i 's:TAG="TAG1":TAG="GCP":g' /root/install-runner.sh
 /root/install-runner.sh
 systemctl status gitlab-runner
 
