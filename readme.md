@@ -1,7 +1,7 @@
 # Skillbox tasks
 
-**Task 1 - branch task01**
-**Task 2 - branch task02**
+- **Task 1 - [branch task01](https://gitlab.skillbox.ru/-/ide/project/sergei_soroka/devops-engineer-basics/tree/task01/-/readme.md/)**
+- **Task 2 - [branch task02](https://gitlab.skillbox.ru/-/ide/project/sergei_soroka/devops-engineer-basics/tree/task02/-/readme.md/)**
 
 Directory stucture:
 ```
@@ -12,7 +12,7 @@ Directory stucture:
 ├── unreg_runner.sh - unregister runner script example
 ├── tf-install.sh - terraform install script example
 ├── start.sh - startup script example for runners
-├── tf.runner
+├── tf.runner               - Create external gitlab runner on GCP
 │   ├── application.tf      - statefull MiG for runner
 │   ├── data.tf             - external datasource
 │   ├── locals.tf           - locals
@@ -21,7 +21,7 @@ Directory stucture:
 │   ├── start.tpl           - startup shell script template
 │   ├── terraform.tfvars    - variables values
 │   └── vars.tf             - variables 
-├── tf.stage
+├── tf.stage                - Create external stage app server on GCP
 │   ├── application.tf      - statefull MiG for stage app server
 │   ├── data.tf             - external datasource
 │   ├── locals.tf           - locals
