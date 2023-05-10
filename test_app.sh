@@ -1,7 +1,7 @@
 #!/bin/bash
 set -ex
 # Make curl request and store output in variable
-output=$(curl http://127.0.0.1:8000)
+output=$(curl http://127.0.0.1:80)
 echo $output
 
 # Check if "Django Girls Blog" exists in output
