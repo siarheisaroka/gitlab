@@ -56,11 +56,16 @@ save:
   - docker push $DOCKER_USER_NAME/$IMAGE_NAME:$IMAGE_TAG
 
 run_on_stage:
+  stage: stage_pub
   tags:
   - STAGE
   environment:
     name: task02
-  stage: stage_pub
+  script:
+  - docker system prune -f
+  - docker-compose up -d
+
+
 
 
 
