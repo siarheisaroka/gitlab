@@ -1,60 +1,68 @@
 stages:
-  - testcode
-  - build
-  - test
-  - push
+- build
+- test
+- push
+- stage_pub
 
 variables:
-  IMAGE_NAME: "djg"
-  IMAGE_TAG: "0.01"
-
-testcode:
-  stage: testcode
-  script:
-    - cd 01_IntroductionToDevOps
-    - PATH=/home/gitlab-runner/.local/bin:$PATH
-    - flake8 --exclude=.venv --ignore=E501 .
+  test_var: "app"
 
 build:
   stage: build
+  tags:
+  - GCP
+  environment:
+    name: task02
   script:
-    - docker system prune -f
-    - ls -al
-    - cd 01_IntroductionToDevOps
-    - docker build -t $IMAGE_NAME:$IMAGE_TAG .
-    - mkdir -p build
-    - ls -al
-    - docker save $IMAGE_NAME:$IMAGE_TAG -o build/$IMAGE_NAME.tar.gz
-    - ls -al build/
-    - echo "registry name is $CI_REGISTRY_IMAGE" 
+  - docker system prune -f
+  - ls -al
+  - cat 02_Continuous_Delivery/html/index.html | head -n 15 refresh || sed -i '10a\\t\<meta http-equiv="refresh" content="5"\>' index.html
+  - docker build -t $IMAGE_NAME:$IMAGE_TAG .
+  - mkdir -p build
+  - ls -al
+  - docker save $IMAGE_NAME:$IMAGE_TAG -o build/$IMAGE_NAME.tar.gz
+  - ls -al build/
   artifacts:
     when: on_success
     paths:
-      - 01_IntroductionToDevOps/build/
+    - build/
 test:
   stage: test
+  tags:
+  - GCP
+  environment:
+    name: task02
   script:
-      - cd 01_IntroductionToDevOps
-      - docker system prune -f
-      - docker-compose up -d
-      - sleep 10
-      - ss -ntpl
-      - ./test_app.sh
+  - docker system prune -f
+  - docker-compose up -d
+  - sleep 10
+  - ss -ntpl
+  - ./test_app.sh
   after_script:
-    - echo "Execute this command after the `script` section completes."
-    - cd 01_IntroductionToDevOps
-    - ls -al
-    - docker-compose down
+  - echo "Execute this command after the `script` section completes."
+  - ls -al
+  - docker-compose down
 
 save:
   stage: push
+  tags:
+  - GCP
+  environment:
+    name: task02
   script:
-    - cd 01_IntroductionToDevOps
-    - docker load -i build/$IMAGE_NAME.tar.gz
-    - docker tag $IMAGE_NAME:$IMAGE_TAG $DOCKER_USER_NAME/$IMAGE_NAME:$IMAGE_TAG
-    - docker login -u $DOCKER_USER_NAME -p $BUILD_TOKEN
-    - docker push $DOCKER_USER_NAME/$IMAGE_NAME:$IMAGE_TAG
-  
+  - docker load -i build/$IMAGE_NAME.tar.gz
+  - docker tag $IMAGE_NAME:$IMAGE_TAG $DOCKER_USER_NAME/$IMAGE_NAME:$IMAGE_TAG
+  - docker login -u $DOCKER_USER_NAME -p $BUILD_TOKEN
+  - docker push $DOCKER_USER_NAME/$IMAGE_NAME:$IMAGE_TAG
+
+run_on_stage:
+  tags:
+  - STAGE
+  environment:
+    name: task02
+  stage: stage_pub
+
+
 
 
 
