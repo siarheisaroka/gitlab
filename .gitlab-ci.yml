@@ -1,0 +1,71 @@
+stages:
+  - testcode
+  - build
+  - test
+  - push
+
+variables:
+  IMAGE_NAME: "djg"
+  IMAGE_TAG: "0.01"
+
+testcode:
+  stage: testcode
+  tags:
+    - GCP
+  script:
+    - pip install flake8
+    - cd 01_IntroductionToDevOps
+    - PATH=/home/gitlab-runner/.local/bin:$PATH
+    - flake8 --exclude=.venv --ignore=E501 .
+  only:
+    - task01
+
+build:
+  stage: build
+  tags:
+    - GCP
+  script:
+    - docker system prune -f
+    - ls -al
+    - cd 01_IntroductionToDevOps
+    - docker build -t $IMAGE_NAME:$IMAGE_TAG .
+    - mkdir -p build
+    - ls -al
+    - docker save $IMAGE_NAME:$IMAGE_TAG -o build/$IMAGE_NAME.tar.gz
+    - ls -al build/
+  artifacts:
+    when: on_success
+    paths:
+      - 01_IntroductionToDevOps/build/
+  only:
+    - task01
+test:
+  stage: test
+  tags:
+    - GCP
+  script:
+      - cd 01_IntroductionToDevOps
+      - docker system prune -f
+      - docker-compose up -d
+      - sleep 10
+      - ss -ntpl
+      - ./test_app.sh
+  after_script:
+    - echo "Execute this command after the `script` section completes."
+    - cd 01_IntroductionToDevOps
+    - ls -al
+    - docker-compose down
+  only:
+    - task01
+save:
+  stage: push
+  tags:
+    - GCP
+  script:
+    - cd 01_IntroductionToDevOps
+    - docker load -i build/$IMAGE_NAME.tar.gz
+    - docker tag $IMAGE_NAME:$IMAGE_TAG $DOCKER_USER_NAME/$IMAGE_NAME:$IMAGE_TAG
+    - docker login -u $DOCKER_USER_NAME -p $BUILD_TOKEN
+    - docker push $DOCKER_USER_NAME/$IMAGE_NAME:$IMAGE_TAG
+  only:
+    - task01
