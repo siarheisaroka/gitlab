@@ -1,7 +1,7 @@
 # Skillbox tasks
 
-- **Task 1 - [branch task01](https://gitlab.skillbox.ru/-/ide/project/sergei_soroka/devops-engineer-basics/tree/task01/-/readme.md/)**
-- **Task 2 - [branch task02](https://gitlab.skillbox.ru/-/ide/project/sergei_soroka/devops-engineer-basics/tree/task02/-/readme.md/)**
+- **Task 1 - [branch task01](https://gitlab.skillbox.ru/-/ide/project/sergei_soroka/devops-engineer-basics/tree/task01/-/)**
+- **Task 2 - [branch task02](https://gitlab.skillbox.ru/-/ide/project/sergei_soroka/devops-engineer-basics/tree/task02/-/)**
 
 Directory stucture:
 ```
