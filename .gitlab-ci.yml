@@ -4,6 +4,7 @@ stages:
 - push
 - stage_pub
 
+
 variables:
   test_var: "app"
 
@@ -64,6 +65,17 @@ run_on_stage:
   script:
   - docker system prune -f
   - docker-compose up -d
+
+archive_on_stage:
+  stage: stage_pub
+  tags:
+  - STAGE
+  environment:
+    name: task02
+  script:
+  - tar -czvf archive.tar.gz ./02_Continuous_Delivery
+  - docker cp ./archive.tar.gz nginx:/usr/share/nginx/html/archive/
+
 
 
 
