@@ -66,6 +66,7 @@ run_on_stage:
   - docker system prune -f
   - docker-compose up -d
 
+# 34.123.186.234/archive/archive.tar.gz
 archive_on_stage:
   stage: stage_pub
   tags:
@@ -75,6 +76,8 @@ archive_on_stage:
   script:
   - tar -czvf archive.tar.gz ./02_Continuous_Delivery
   - docker cp ./archive.tar.gz nginx:/usr/share/nginx/html/archive/
+  - IP=$(gcloud compute instances list --filter "name:stage*" --format "value(EXTERNAL_IP)")
+  - echo "link to archive - http://$IP/archive/archive.tar.gz"
 
 
 
