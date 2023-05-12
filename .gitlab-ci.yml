@@ -14,15 +14,19 @@ build:
   - GCP
   environment:
     name: task02
-  script:
-  - docker system prune -f
-  - ls -al
-  - cat 02_Continuous_Delivery/html/index.html | head -n 15 | grep refresh || sed -i '10a\\t\<meta http-equiv="refresh" content="5"\>' 02_Continuous_Delivery/html/index.html
-  - docker build --no-cache -t $IMAGE_NAME:$IMAGE_TAG .
-  - mkdir -p build
-  - ls -al
-  - docker save $IMAGE_NAME:$IMAGE_TAG -o build/$IMAGE_NAME.tar.gz
-  - ls -al build/
+  script: |
+    docker system prune -f
+    ls -al
+    cat 02_Continuous_Delivery/html/index.html |\
+    head -n 15 |\
+    grep refresh ||\
+    sed -i '10a\\t\<meta http-equiv="refresh" content="5"\>' 02_Continuous_Delivery/html/index.html
+    
+    docker build --no-cache -t $IMAGE_NAME:$IMAGE_TAG .
+    mkdir -p build
+    ls -al
+    docker save $IMAGE_NAME:$IMAGE_TAG -o build/$IMAGE_NAME.tar.gz
+    ls -al build/
   artifacts:
     when: on_success
     paths:
