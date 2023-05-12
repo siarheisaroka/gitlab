@@ -15,6 +15,7 @@ build:
   environment:
     name: task02
   script: |
+    set -x
     docker system prune -f
     ls -al
     cat 02_Continuous_Delivery/html/index.html |\
