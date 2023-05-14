@@ -1,5 +1,5 @@
 # Skillbox tasks
-
+```
 build_image:
   stage: build
   image: docker:20.10.16
@@ -12,3 +12,4 @@ build_image:
   script:
     - docker build -t $IMAGE_NAME:$IMAGE_TAG .
     - docker push $IMAGE_NAME:$IMAGE_TAG
+```
