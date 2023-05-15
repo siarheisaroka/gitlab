@@ -1,4 +1,4 @@
-# Skillbox tasks
+# Tasks
 
 - **Task 1 - branch task01**
 - **Task 2 - branch task02**
